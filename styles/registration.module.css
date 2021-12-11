@@ -1,0 +1,48 @@
+/* https://www.joshwcomeau.com/css/full-bleed/ */
+.page {
+  display: grid;
+  grid-template-columns: 1fr min(65ch, 100%) 1fr;
+}
+
+.page > * {
+  grid-column: 2;
+}
+.full-bleed {
+  width: 100%;
+  grid-column: 1 / 4;
+}
+
+/* Form Grid */
+/* https://grid.layoutit.com/ */
+.form {
+  
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .form{
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr 1fr; 
+    gap: 1rem; 
+    grid-template-areas: 
+      "firstName lastName"
+      "email email"
+      "password password"
+      "submit submit";
+    }
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.firstName { grid-area: firstName; }
+.lastName { grid-area: lastName; }
+.email { grid-area: email; }
+.password { grid-area: password; }
+.submit {grid-area: submit;}
