@@ -1,11 +1,8 @@
 import React from 'react'
 import {
   Formik,
-  FormikHelpers,
-  FormikProps,
   Form,
   Field,
-  FieldProps,
 } from 'formik';
 import styles from '../styles/registration.module.css'
 
@@ -17,13 +14,6 @@ interface MyFormValues {
   password: string;
 }
 
-// function Registration() {
-//   return(
-//     <main>
-//       <Form
-//     </main>
-//   )
-// }
 const Registration: React.FC<{}> = () => {
   const initialValues: MyFormValues = { firstName: '', lastName: '', email: '', password: '' };
   return (
