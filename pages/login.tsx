@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import {
     Formik,
     Form,
@@ -43,7 +44,8 @@ const Login: React.FC<{}> = () => {
                             <Field type="password" id="password" name="password" placeholder="*****" />
                             {errors.password && touched.password && <div>{errors.password}</div>}
                         </div>
-                        <button className={styles.submit} type="submit">Login</button>
+                        <button className={styles.submitLogin} type="submit">Login</button>
+                        <Link href="/signup/">Sign Up</Link>
                     </Form>
                 )}
             </Formik>

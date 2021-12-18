@@ -32,7 +32,7 @@
         grid-template-areas:
             "email email"
             "password password"
-            "submit submit"
+            "login signup"
     }
 }
 
@@ -53,6 +53,10 @@
     grid-area: password;
 }
 
-.submit {
-    grid-area: submit;
+.submitLogin {
+    grid-area: login;
+}
+
+.submitSignUp {
+    grid-area: signup;
 }
