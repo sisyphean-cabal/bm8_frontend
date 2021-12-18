@@ -26,11 +26,12 @@
   .form{
     display: grid;
     grid-template-columns: 1fr 1fr; 
-    grid-template-rows: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
     gap: 1rem; 
     grid-template-areas: 
       "firstName lastName"
       "email email"
+      "phoneNumber phoneNumber"
       "password password"
       "passwordConfirmation passwordConfirmation"
       "submit submit";
@@ -45,6 +46,7 @@
 .firstName { grid-area: firstName; }
 .lastName { grid-area: lastName; }
 .email { grid-area: email; }
+.phoneNumber {grid-area: phoneNumber; }
 .password { grid-area: password; }
 .passwordConfirmation { grid-area: passwordConfirmation; }
 .submit {grid-area: submit;}

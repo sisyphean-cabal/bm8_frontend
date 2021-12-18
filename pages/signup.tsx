@@ -13,12 +13,13 @@ interface RegistrationFormValues {
   firstName: string;
   lastName: string;
   email: string;
+  phoneNumber: string;
   password: string;
   passwordConfirmation: string;
 }
 
 const Registration: React.FC<{}> = () => {
-  const initialValues: RegistrationFormValues = { firstName: '', lastName: '', email: '', password: '', passwordConfirmation: '' };
+  const initialValues: RegistrationFormValues = { firstName: '', lastName: '', email: '', phoneNumber: '', password: '', passwordConfirmation: '' };
   const register = useMutation<ReturnType<typeof axios.post>, AxiosError, RegistrationFormValues>(data => axios.post('http://localhost:8000/api/account/register', {
     ...data
   }))
@@ -55,6 +56,11 @@ const Registration: React.FC<{}> = () => {
               <label htmlFor="email">Email</label>
               <Field id="email" type="email" name="email" placeholder="Email@email.com" />
               {errors.email && touched.email && <div>{errors.email}</div>}
+            </div>
+            <div className={`${styles.inputWrapper} ${styles.phoneNumber}`}>
+              <label htmlFor="email">Phone</label>
+              <Field id="phoneNumber" type="phoneNumber" name="phoneNumber" placeholder="+01234567890" />
+              {errors.phoneNumber && touched.phoneNumber && <div>{errors.phoneNumber}</div>}
             </div>
             <div className={`${styles.inputWrapper} ${styles.password}`}>
               <label htmlFor="password">Password</label>
