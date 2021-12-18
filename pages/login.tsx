@@ -9,70 +9,41 @@ import { useMutation } from 'react-query'
 import axios, { AxiosError } from 'axios';
 
 
-interface RegistrationFormValues {
-    firstName: string;
-    lastName: string;
+interface LoginFormValues {
     email: string;
-    phoneNumber: string;
     password: string;
-    passwordConfirmation: string;
 }
 
-const Registration: React.FC<{}> = () => {
-    const initialValues: RegistrationFormValues = { firstName: '', lastName: '', email: '', phoneNumber: '', password: '', passwordConfirmation: '' };
-    const register = useMutation<ReturnType<typeof axios.post>, AxiosError, RegistrationFormValues>(data => axios.post('http://localhost:8000/api/account/register', {
+const Login: React.FC<{}> = () => {
+    const initialValues: LoginFormValues = { email: '', password: '' };
+    const login = useMutation<ReturnType<typeof axios.post>, AxiosError, LoginFormValues>(data => axios.post('http://localhost:8000/api/account/authenticate', {
         ...data
     }))
     return (
         <main className={styles.page}>
-            <h1>Registration</h1>
+            <h1>Login</h1>
             <Formik
                 initialValues={initialValues}
                 onSubmit={async (values, actions) => {
                     actions.setSubmitting(true);
-                    await register.mutateAsync(values)
+                    await login.mutateAsync(values)
                     await new Promise((res) => setTimeout(res, 10000))
                     actions.setSubmitting(false);
-                }}
-                validate={(values) => {
-                    const errors: Partial<RegistrationFormValues> = {}
-                    if (values.password != values.passwordConfirmation) {
-                        errors.passwordConfirmation = "Passwords don't match"
-                    }
-                    return errors
                 }}
             >
                 {({ errors, touched }) => (
                     <Form className={styles.form}>
-                        <div className={`${styles.inputWrapper} ${styles.firstName}`}>
-                            <label htmlFor="firstName" >First Name</label>
-                            <Field id="firstName" type="text" name="firstName" placeholder="First Name" />
-                        </div>
-                        <div className={`${styles.inputWrapper} ${styles.lastName}`}>
-                            <label htmlFor="lastName">Last Name</label>
-                            <Field id="lastName" type="text" name="lastName" placeholder="Last Name (optional)" />
-                        </div>
                         <div className={`${styles.inputWrapper} ${styles.email}`}>
                             <label htmlFor="email">Email</label>
                             <Field id="email" type="email" name="email" placeholder="Email@email.com" />
                             {errors.email && touched.email && <div>{errors.email}</div>}
-                        </div>
-                        <div className={`${styles.inputWrapper} ${styles.phoneNumber}`}>
-                            <label htmlFor="email">Phone</label>
-                            <Field id="phoneNumber" type="phoneNumber" name="phoneNumber" placeholder="+01234567890" />
-                            {errors.phoneNumber && touched.phoneNumber && <div>{errors.phoneNumber}</div>}
                         </div>
                         <div className={`${styles.inputWrapper} ${styles.password}`}>
                             <label htmlFor="password">Password</label>
                             <Field type="password" id="password" name="password" placeholder="*****" />
                             {errors.password && touched.password && <div>{errors.password}</div>}
                         </div>
-                        <div className={`${styles.inputWrapper} ${styles.passwordConfirmation}`}>
-                            <label htmlFor="passwordConfirmation">Confirm Password</label>
-                            <Field type="password" id="passwordConfirmation" name="passwordConfirmation" placeholder="*****" />
-                            {errors.passwordConfirmation && touched.passwordConfirmation && <div>{errors.passwordConfirmation}</div>}
-                        </div>
-                        <button className={styles.submit} type="submit">Submit</button>
+                        <button className={styles.submit} type="submit">Login</button>
                     </Form>
                 )}
             </Formik>
@@ -80,4 +51,4 @@ const Registration: React.FC<{}> = () => {
     );
 };
 
-export default Registration
+export default Login

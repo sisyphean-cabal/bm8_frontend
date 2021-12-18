@@ -4,8 +4,8 @@ import {
   Form,
   Field,
 } from 'formik';
-import styles from '../styles/registration.module.css'
-import {useMutation} from 'react-query'
+import styles from '../styles/Registration.module.css'
+import { useMutation } from 'react-query'
 import axios, { AxiosError } from 'axios';
 
 
@@ -42,7 +42,7 @@ const Registration: React.FC<{}> = () => {
           return errors
         }}
       >
-        {({errors, touched}) => (
+        {({ errors, touched }) => (
           <Form className={styles.form}>
             <div className={`${styles.inputWrapper} ${styles.firstName}`}>
               <label htmlFor="firstName" >First Name</label>
