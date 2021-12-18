@@ -4,7 +4,7 @@ import {
     Form,
     Field,
 } from 'formik';
-import styles from '../styles/registration.module.css'
+import styles from '../styles/Login.module.css'
 import { useMutation } from 'react-query'
 import axios, { AxiosError } from 'axios';
 

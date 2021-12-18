@@ -27,10 +27,12 @@
     .form {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 1fr;
         gap: 1rem;
         grid-template-areas:
-            "email password submit"
+            "email email"
+            "password password"
+            "submit submit"
     }
 }
 
@@ -54,4 +56,3 @@
 .submit {
     grid-area: submit;
 }
-
