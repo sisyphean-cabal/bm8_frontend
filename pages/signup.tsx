@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Formik,
   Form,
@@ -8,6 +8,9 @@ import styles from '../styles/registration.module.css'
 import {useMutation} from 'react-query'
 import axios, { AxiosError } from 'axios';
 
+// phone number stuff
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 interface RegistrationFormValues {
   firstName: string;
@@ -23,6 +26,7 @@ const Registration: React.FC<{}> = () => {
   const register = useMutation<ReturnType<typeof axios.post>, AxiosError, RegistrationFormValues>(data => axios.post('http://localhost:8000/api/account/register', {
     ...data
   }))
+  const [value, setValue] = useState('')
   return (
     <main className={styles.page}>
       <h1>Registration</h1>
@@ -41,6 +45,7 @@ const Registration: React.FC<{}> = () => {
           }
           return errors
         }}
+
       >
         {({errors, touched}) => (
           <Form className={styles.form}>
@@ -59,7 +64,7 @@ const Registration: React.FC<{}> = () => {
             </div>
             <div className={`${styles.inputWrapper} ${styles.phoneNumber}`}>
               <label htmlFor="email">Phone</label>
-              <Field id="phoneNumber" type="phoneNumber" name="phoneNumber" placeholder="+01234567890" />
+              <PhoneInput placeholder="Enter your phone number" value={value} onChange={() => setValue }/>
               {errors.phoneNumber && touched.phoneNumber && <div>{errors.phoneNumber}</div>}
             </div>
             <div className={`${styles.inputWrapper} ${styles.password}`}>
