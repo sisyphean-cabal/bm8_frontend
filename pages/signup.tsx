@@ -1,4 +1,5 @@
 import React, {Component, useState} from 'react'
+
 import {
   Formik,
   Form,
@@ -8,26 +9,20 @@ import styles from '../styles/registration.module.css'
 import {useMutation} from 'react-query'
 import axios, { AxiosError } from 'axios';
 
-// phone number stuff
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input/input'
 
 interface RegistrationFormValues {
   firstName: string;
   lastName: string;
   email: string;
-  phoneNumber: string;
   password: string;
   passwordConfirmation: string;
 }
 
 const Registration: React.FC<{}> = () => {
-  const initialValues: RegistrationFormValues = { firstName: '', lastName: '', email: '', phoneNumber: '', password: '', passwordConfirmation: '' };
+  const initialValues: RegistrationFormValues = { firstName: '', lastName: '', email: '', password: '', passwordConfirmation: '' };
   const register = useMutation<ReturnType<typeof axios.post>, AxiosError, RegistrationFormValues>(data => axios.post('http://localhost:8000/api/account/register', {
     ...data
   }))
-
-  const [value, setValue] = useState("");
   
   return (
     <main className={styles.page}>
@@ -63,11 +58,6 @@ const Registration: React.FC<{}> = () => {
               <label htmlFor="email">Email</label>
               <Field id="email" type="email" name="email" placeholder="Email@email.com" />
               {errors.email && touched.email && <div>{errors.email}</div>}
-            </div>
-            <div className={`${styles.inputWrapper} ${styles.phoneNumber}`}>
-              <label htmlFor="email">Phone</label>
-              <PhoneInput placeholder="Enter your phone number" className="PhoneInput" value={value} onChange={setValue}/>
-              {errors.phoneNumber && touched.phoneNumber && <div>{errors.phoneNumber}</div>}
             </div>
             <div className={`${styles.inputWrapper} ${styles.password}`}>
               <label htmlFor="password">Password</label>
